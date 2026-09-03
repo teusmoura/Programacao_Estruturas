@@ -1,0 +1,5 @@
+status = ("PENDENTE", "PAGO", "SEPARACAO", "ENVIADO", "CONCLUIDO")
+print(len(status))
+print("PAGO" in status)
+print(status.count("PAGO"))
+print(status.index("ENVIADO"))

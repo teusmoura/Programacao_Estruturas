@@ -1,0 +1,5 @@
+um_id = (1,)
+coordenadas_estoque = ((1, 4, 7), (2, 4, 10), (3, 4, 13))
+print(type(um_id), um_id)
+print(coordenadas_estoque[1])
+print(coordenadas_estoque[1][2])
