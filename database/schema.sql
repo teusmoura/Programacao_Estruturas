@@ -1,14 +1,3 @@
--- ============================================================
--- BANCO DIDÁTICO: lojas_rede
--- Estruturas de Dados com Python + MySQL
---
--- Cenário: rede varejista fictícia com lojas principalmente em
--- Minas Gerais, algumas unidades fora do estado, centros de
--- distribuição, canais de venda e uma malha logística simplificada.
--- O banco existe para sustentar os exemplos e atividades da disciplina;
--- não pretende reproduzir um ERP real.
--- ============================================================
-
 CREATE DATABASE IF NOT EXISTS lojas_rede
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
@@ -35,7 +24,6 @@ CREATE TABLE IF NOT EXISTS fornecedores (
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
--- Autorrelacionamento para recursividade e árvores.
 CREATE TABLE IF NOT EXISTS categorias (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -59,7 +47,6 @@ CREATE TABLE IF NOT EXISTS produtos (
         REFERENCES categorias(id_categoria)
 );
 
--- Uma única entidade representa LOJAs e CDs.
 CREATE TABLE IF NOT EXISTS unidades (
     id_unidade INT PRIMARY KEY,
     nome VARCHAR(120) NOT NULL,
@@ -69,7 +56,6 @@ CREATE TABLE IF NOT EXISTS unidades (
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
--- Estoque existe por unidade; não há um estoque global duplicado em produtos.
 CREATE TABLE IF NOT EXISTS estoques (
     id_unidade INT NOT NULL,
     id_produto INT NOT NULL,
@@ -114,7 +100,6 @@ CREATE TABLE IF NOT EXISTS itens_pedido (
         REFERENCES produtos(id_produto)
 );
 
--- Fonte natural para pilhas/histórico.
 CREATE TABLE IF NOT EXISTS historico_status_pedido (
     id_historico INT AUTO_INCREMENT PRIMARY KEY,
     id_pedido INT NOT NULL,
@@ -125,8 +110,6 @@ CREATE TABLE IF NOT EXISTS historico_status_pedido (
         REFERENCES pedidos(id_pedido) ON DELETE CASCADE
 );
 
--- A mesma tabela sustenta FIFO (data_solicitacao) e heap (prioridade/prazo).
--- prioridade: 1 = mais urgente; 5 = menos urgente.
 CREATE TABLE IF NOT EXISTS solicitacoes_reposicao (
     id_solicitacao INT AUTO_INCREMENT PRIMARY KEY,
     id_unidade INT NOT NULL,
@@ -142,7 +125,6 @@ CREATE TABLE IF NOT EXISTS solicitacoes_reposicao (
         REFERENCES produtos(id_produto)
 );
 
--- Encadeamento explícito para a unidade de lista encadeada.
 CREATE TABLE IF NOT EXISTS etapas_reposicao (
     id_etapa INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -151,7 +133,6 @@ CREATE TABLE IF NOT EXISTS etapas_reposicao (
         REFERENCES etapas_reposicao(id_etapa) ON DELETE SET NULL
 );
 
--- Arestas do grafo logístico. Origem/destino podem ser loja ou CD.
 CREATE TABLE IF NOT EXISTS rotas (
     id_rota INT AUTO_INCREMENT PRIMARY KEY,
     id_origem INT NOT NULL,

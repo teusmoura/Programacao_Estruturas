@@ -55,9 +55,16 @@ if errorlevel 1 (
     exit /b 1
 )
 
-rem Torna a raiz do projeto importavel sem pyproject.toml.
-for /f "delims=" %%I in ('"%PYTHON_VENV%" -c "import site; print(site.getsitepackages()[0])"') do set "SITE_PACKAGES=%%I"
-> "%SITE_PACKAGES%\programacao_etmsl.pth" echo %~dp0
+rem Instala a raiz do projeto em modo editavel, tornando "database" importavel.
+set "RAIZ=%~dp0"
+set "RAIZ=%RAIZ:~0,-1%"
+"%PYTHON_VENV%" -m pip install --no-deps -e "%RAIZ%"
+if errorlevel 1 (
+    echo.
+    echo ERRO: falha ao instalar o projeto em modo editavel.
+    pause
+    exit /b 1
+)
 
 echo.
 echo Ambiente pronto.
