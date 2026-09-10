@@ -1,5 +1,10 @@
 # Programação — Estruturas de Dados com Python e MySQL
 
+## Guias por sistema operacional
+
+- [Windows](#comece-aqui)
+- [Ubuntu](README_UBUNTU.md)
+
 ## Comece aqui
 
 O curso usa o padrão XAMPP:

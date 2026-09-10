@@ -63,7 +63,7 @@ Se o usuário `root` do MySQL/MariaDB usar autenticação por socket, crie um us
 
 ```sql
 CREATE USER 'curso'@'localhost' IDENTIFIED BY 'sua_senha';
-GRANT ALL PRIVILEGES ON *.* TO 'curso'@'localhost';
+GRANT ALL PRIVILEGES ON lojas_rede.* TO 'curso'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
