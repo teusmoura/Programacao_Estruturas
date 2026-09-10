@@ -18,6 +18,22 @@ Um `SELECT` materializa valores na memória. Alterar uma `list`, `dict`, `set`, 
 
 ## Preparação
 
-1. Ajuste usuário/senha nos arquivos Python de `database/` se necessário.
-2. Execute `python database/criar_banco.py` na primeira utilização.
-3. Para restaurar o estado didático inicial, execute `python database/reiniciar_banco.py`.
+No padrão XAMPP, use:
+
+- Host: `localhost`
+- Porta: `3306`
+- Usuário: `root`
+- Senha: vazia
+
+1. Verifique se o MySQL do XAMPP está rodando.
+2. Se o padrão foi alterado, ajuste as credenciais com variáveis de ambiente:
+
+```powershell
+$env:MYSQL_USER = "root"
+$env:MYSQL_PASSWORD = "sua_senha"
+$env:MYSQL_HOST = "localhost"
+$env:MYSQL_PORT = "3306"
+```
+
+3. Execute `python database/criar_banco.py` na primeira utilização.
+4. Para restaurar o estado didático inicial, execute `python database/reiniciar_banco.py`.

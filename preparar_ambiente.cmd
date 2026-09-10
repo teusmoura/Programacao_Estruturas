@@ -21,14 +21,13 @@ if not exist "%PYTHON_VENV%" (
     if not defined PYTHON_COMANDO (
         echo.
         echo ERRO: Python nao foi encontrado.
-        echo Instale o Python 3 e marque a opcao para adiciona-lo ao PATH,
-        echo ou instale o Python Launcher ^(py^).
+        echo Instale o Python 3 e marque a opcao para adiciona-lo ao PATH.
         echo.
         pause
         exit /b 1
     )
 
-    echo Criando ambiente virtual...
+    echo Criando ambiente virtual do curso...
     !PYTHON_COMANDO! -m venv "%PASTA_VENV%"
     if errorlevel 1 (
         echo.
@@ -38,7 +37,7 @@ if not exist "%PYTHON_VENV%" (
     )
 )
 
-echo Instalando dependencias...
+echo Instalando dependencias do curso...
 "%PYTHON_VENV%" -m pip install --upgrade pip
 if errorlevel 1 (
     echo.
@@ -55,27 +54,31 @@ if errorlevel 1 (
     exit /b 1
 )
 
-rem Instala a raiz do projeto em modo editavel, tornando "database" importavel.
-set "RAIZ=%~dp0"
-set "RAIZ=%RAIZ:~0,-1%"
-"%PYTHON_VENV%" -m pip install --no-deps -e "%RAIZ%"
-if errorlevel 1 (
-    echo.
-    echo ERRO: falha ao instalar o projeto em modo editavel.
-    pause
-    exit /b 1
-)
+echo.
+echo Ambiente pronto para as atividades.
+echo.
+echo O que fazer agora:
+echo   1. Verifique se o MySQL do XAMPP esta rodando.
+echo   2. Padrao XAMPP: usuario=root, senha=vazia, host=localhost, porta=3306
+echo   3. Se o ambiente tiver senha diferente, defina as variaveis:
+
+echo      set MYSQL_USER=root
+
+echo      set MYSQL_PASSWORD=sua_senha
+
+echo      set MYSQL_HOST=localhost
+
+echo      set MYSQL_PORT=3306
+
+echo   4. Crie e popular o banco:
+
+echo      "%PYTHON_VENV%" database\criar_banco.py
+
+echo   5. Quando precisar resetar os dados:
+
+echo      "%PYTHON_VENV%" database\reiniciar_banco.py
 
 echo.
-echo Ambiente pronto.
-echo Interpretador: %PYTHON_VENV%
-echo.
-echo Para criar e popular o banco lojas_rede:
-echo   "%PYTHON_VENV%" database\criar_banco.py
-echo.
-echo Para restaurar os dados iniciais:
-echo   "%PYTHON_VENV%" database\reiniciar_banco.py
-echo.
-echo Abrindo um Prompt de Comando com o ambiente virtual ativado...
+echo Abrindo um prompt com o ambiente do curso ativado...
 call "%PASTA_VENV%\Scripts\activate.bat"
 cmd /k

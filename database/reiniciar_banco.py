@@ -1,6 +1,8 @@
 from pathlib import Path
 import mysql.connector
 
+from .config import get_mysql_config
+
 PASTA = Path(__file__).resolve().parent
 
 
@@ -12,12 +14,7 @@ def executar_arquivo(cursor, caminho):
             cursor.execute(comando)
 
 
-conexao = mysql.connector.connect(
-    host="localhost",
-    port=3306,
-    user="root",
-    password="",
-)
+conexao = mysql.connector.connect(**get_mysql_config())
 cursor = conexao.cursor()
 
 try:
