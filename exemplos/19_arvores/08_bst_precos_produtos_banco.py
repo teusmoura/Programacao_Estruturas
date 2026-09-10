@@ -10,7 +10,10 @@ def inserir(no, chave, dado):
     else: no.direita = inserir(no.direita, chave, dado)
     return no
 
-conexao = criar_conexao(); cursor = conexao.cursor()
+# criar_conexao() abre a ligação entre o programa e o banco MySQL.
+conexao = criar_conexao()
+# O cursor envia comandos SQL e recebe os resultados do banco.
+cursor = conexao.cursor()
 cursor.execute("SELECT preco, sku, nome FROM produtos WHERE id_produto <= 8")
 raiz = None
 for preco, sku, nome in cursor.fetchall():

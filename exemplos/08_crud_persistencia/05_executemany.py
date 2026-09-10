@@ -1,6 +1,8 @@
 from database import criar_conexao
 
+# criar_conexao() abre a ligação entre o programa e o banco MySQL.
 conexao = criar_conexao()
+# O cursor envia comandos SQL e recebe os resultados do banco.
 cursor = conexao.cursor()
 cpfs = ["900.000.000-03", "900.000.000-04", "900.000.000-05"]
 for cpf in cpfs:

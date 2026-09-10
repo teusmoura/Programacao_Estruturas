@@ -1,6 +1,9 @@
 from collections import deque
 from database import criar_conexao
-conexao=criar_conexao(); cursor=conexao.cursor()
+# criar_conexao() abre a ligação entre o programa e o banco MySQL.
+conexao=criar_conexao()
+# O cursor envia comandos SQL e recebe os resultados do banco.
+cursor=conexao.cursor()
 cursor.execute("SELECT id_solicitacao,prioridade,data_solicitacao,prazo FROM solicitacoes_reposicao WHERE status='PENDENTE'")
 registros=cursor.fetchall()
 fifo=deque(sorted(registros,key=lambda r:r[2]))

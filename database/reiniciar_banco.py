@@ -1,7 +1,10 @@
 from pathlib import Path
 import mysql.connector
 
-from .config import get_mysql_config
+try:
+    from .config import get_mysql_config
+except ImportError:
+    from config import get_mysql_config
 
 PASTA = Path(__file__).resolve().parent
 
@@ -14,7 +17,7 @@ def executar_arquivo(cursor, caminho):
             cursor.execute(comando)
 
 
-conexao = mysql.connector.connect(**get_mysql_config())
+conexao = mysql.connector.connect(**get_mysql_config(incluir_banco=False))
 cursor = conexao.cursor()
 
 try:

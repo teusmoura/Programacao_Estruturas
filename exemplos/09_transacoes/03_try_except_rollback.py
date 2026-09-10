@@ -1,5 +1,8 @@
 from database import criar_conexao
-conexao=criar_conexao(); cursor=conexao.cursor()
+# criar_conexao() abre a ligação entre o programa e o banco MySQL.
+conexao=criar_conexao()
+# O cursor envia comandos SQL e recebe os resultados do banco.
+cursor=conexao.cursor()
 try:
     cursor.execute("UPDATE estoques SET quantidade=quantidade-1 WHERE id_unidade=1 AND id_produto=4")
     # FK inválida força falha para demonstrar rollback.

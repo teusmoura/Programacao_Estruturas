@@ -7,7 +7,10 @@ MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
 MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "lojas_rede")
 
 
-def get_mysql_config(database: str | None = None):
+def get_mysql_config(
+    database: str | None = None,
+    incluir_banco: bool = True,
+):
     """Retorna os parâmetros de conexão com o MySQL.
 
     Os valores podem ser sobrescritos por variáveis de ambiente,
@@ -18,9 +21,10 @@ def get_mysql_config(database: str | None = None):
         "port": MYSQL_PORT,
         "user": MYSQL_USER,
         "password": MYSQL_PASSWORD,
+        "use_pure": True,
     }
-    if database is not None:
+    if database:
         config["database"] = database
-    elif MYSQL_DATABASE:
+    elif incluir_banco and MYSQL_DATABASE:
         config["database"] = MYSQL_DATABASE
     return config
