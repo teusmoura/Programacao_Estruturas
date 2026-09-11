@@ -47,6 +47,7 @@ python database\criar_banco.py
 
 Isso cria o banco `lojas_rede` com os dados iniciais das atividades.
 
+
 ### 4) Começar a usar
 
 - `exemplos/`: veja exemplos prontos

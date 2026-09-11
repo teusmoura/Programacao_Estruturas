@@ -1,3 +1,4 @@
+
 from database import criar_conexao
 
 # criar_conexao() abre a ligação entre o programa e o banco MySQL.

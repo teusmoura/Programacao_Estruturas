@@ -54,6 +54,14 @@ if errorlevel 1 (
     exit /b 1
 )
 
+"%PYTHON_VENV%" -m pip install -e "%~dp0"
+if errorlevel 1 (
+    echo.
+    echo ERRO: falha ao instalar o projeto.
+    pause
+    exit /b 1
+)
+
 echo.
 echo Ambiente pronto para as atividades.
 echo.
